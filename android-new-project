@@ -5,10 +5,15 @@ bold="\033[1m"
 red="\033[31m"
 reset="\033[0m"
 
-script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+if [[ -L "${BASH_SOURCE[0]}" ]]; then
+    SCRIPT_DIR="$(readlink "${BASH_SOURCE[0]}")"
+    SCRIPT_DIR="$( cd "$( dirname "${SCRIPT_DIR}" )" >/dev/null 2>&1 && pwd )"
+fi
 
 # get all non-hidden folders in the current dir (these are the templates)
-templates=($(find $script_dir -maxdepth 1 -mindepth 1 -type d -not -name ".*"))
+templates=($(find $SCRIPT_DIR -maxdepth 1 -mindepth 1 -type d -not -name ".*"))
 
 function usage () {
   echo -e "${bold}Usage:${reset} ${green}./android-new-project${reset} ${bold}<template-name>${reset} ${bold}<project-name>${reset}"
@@ -52,7 +57,7 @@ if [[ $# -eq 1 ]]; then
 fi
 
 # on invalid template name, print usage
-if [[ ! -d $script_dir/$1 ]]; then
+if [[ ! -d $SCRIPT_DIR/$1 ]]; then
   echo -e "${bold}${red}Error:${reset} Invalid template name."
   echo 
   usage
@@ -67,7 +72,7 @@ fi
 
 # create destination folder and copy template files
 mkdir $2
-cp -r $script_dir/$1/* $2
+cp -r $SCRIPT_DIR/$1/* $2
 
 # print message on success
 if [[ $? -eq 0 ]]; then
