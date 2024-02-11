@@ -20,8 +20,8 @@ The templates included are:
 
 ## Rationale
 
-The purpose of this repository is to keep copies of them, so that you can use
-them even if you don't have Android Studio installed. 
+The purpose of this repository is to keep copies of the templates, so that you
+can use them even if you don't have Android Studio installed. 
 
 For instance, some developers prefer a minimal setup, which doesn't include a
 full-blown IDE: It is possible to develop Android apps using just the Android
