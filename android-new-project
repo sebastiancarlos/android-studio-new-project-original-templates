@@ -7,8 +7,8 @@ reset="\033[0m"
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# get all folders in the current dir (these are the templates)
-templates=($(find $script_dir -maxdepth 1 -mindepth 1 -type d))
+# get all non-hidden folders in the current dir (these are the templates)
+templates=($(find $script_dir -maxdepth 1 -mindepth 1 -type d -not -name ".*"))
 
 function usage () {
   echo -e "${bold}Usage:${reset} ${green}./android-new-project${reset} ${bold}<template-name>${reset} ${bold}<project-name>${reset}"
