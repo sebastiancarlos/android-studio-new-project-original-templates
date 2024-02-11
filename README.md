@@ -12,7 +12,7 @@ The templates included are:
 - `NavigationDrawerViewsActivity`
 - `ResponsiveViewsActivity`
 
-<screenshot of "new project" window here>
+<img width="894" alt="new-project" src="https://github.com/sebastiancarlos/android-studio-new-project-original-templates/assets/88276600/1d7f574c-c80c-43b5-b0fd-71dedb960086">
 
 **Note:** The two C++ templates are not included.
 
@@ -50,7 +50,7 @@ run on an Android device or emulator.
 
 The templates were generated with the following settings:
 
-<screenshot of "settings" window here>
+<img width="806" alt="settings" src="https://github.com/sebastiancarlos/android-studio-new-project-original-templates/assets/88276600/6cfc8ce4-ce75-4df5-8363-f8debd7980d9">
 
 - Android Studio version: 2023.1.1 (Latest at the time of writing)
 - Language: Kotlin
