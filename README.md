@@ -52,11 +52,11 @@ The templates were generated with the following settings:
 
 <img width="806" alt="settings" src="https://github.com/sebastiancarlos/android-studio-new-project-original-templates/assets/88276600/6cfc8ce4-ce75-4df5-8363-f8debd7980d9">
 
-- Android Studio version: 2023.1.1 (Latest at the time of writing)
-- Language: Kotlin
-- Minimum SDK: API 25, Android 7.1.1 (Lowest SDK version with over 95%
+- **Android Studio version:** 2023.1.1 (Latest at the time of writing)
+- **Language:** Kotlin
+- **Minimum SDK:** API 25, Android 7.1.1 (Lowest SDK version with over 95%
   coverage)
-- Build Configuration Language: Kotlin DSL.
+- **Build Configuration Language:** Kotlin DSL.
 
 The following superfluous files and folders were removed:
 - `local.properties` (only relevant for use with Android Studio)
