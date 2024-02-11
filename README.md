@@ -2,6 +2,8 @@
 
 This repository contains copies of the original templates used by Android Studio when creating a new project.
 
+**Last updated: 2024-02-11**
+
 The templates included are:
 
 - `NoActivity`
@@ -15,8 +17,6 @@ The templates included are:
 <img width="894" alt="new-project" src="https://github.com/sebastiancarlos/android-studio-new-project-original-templates/assets/88276600/1d7f574c-c80c-43b5-b0fd-71dedb960086">
 
 **Note:** The two C++ templates are not included.
-
-**Last updated: 2024-02-11**
 
 ## Rationale
 
