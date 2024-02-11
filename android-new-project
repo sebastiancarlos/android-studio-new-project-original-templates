@@ -1,0 +1,75 @@
+#! /usr/bin/env bash
+
+green="\033[32m"
+bold="\033[1m"
+red="\033[31m"
+reset="\033[0m"
+
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# get all folders in the current dir (these are the templates)
+templates=($(find $script_dir -maxdepth 1 -mindepth 1 -type d))
+
+function usage () {
+  echo -e "${bold}Usage:${reset} ${green}./android-new-project${reset} ${bold}<template-name>${reset} ${bold}<project-name>${reset}"
+  echo -e "       ${green}./android-new-project${reset} ${bold}--list/-l${reset}"
+  echo -e "       ${green}./android-new-project${reset} ${bold}--help/-h${reset}"
+  echo -e ""
+  echo -e "  - ${bold}<template-name>${reset} is the name of the template you want to use."
+  echo -e "  - ${bold}<project-name>${reset} is the name of the project you want to create. A folder"
+  echo -e "    with this name will be created in the current directory, and the template"
+  echo -e "    files will be copied into it."
+  echo -e "  - ${bold}--list/-l${reset} will list the available templates."
+  echo -e "  - ${bold}--help/-h${reset} prints this help."
+  echo ""
+  echo -e "${bold}Available templates:${reset}"
+  for template in ${templates[@]}; do
+    echo "  - $(basename $template)"
+  done
+}
+
+# on no arguments, or --help/-h, print usage
+if [[ $# -eq 0 ]] || [[ $1 == "--help" ]] || [[ $1 == "-h" ]]; then
+  usage
+  exit 0
+fi
+
+# on --list/-l, print available templates
+if [[ $1 == "--list" ]] || [[ $1 == "-l" ]]; then
+  echo -e "${bold}Available templates:${reset}"
+  for template in ${templates[@]}; do
+    echo "$(basename $template)"
+  done
+  exit 0
+fi
+
+# on no project name, print usage
+if [[ $# -eq 1 ]]; then
+  echo -e "${bold}${red}Error:${reset} No project name specified."
+  echo 
+  usage
+  exit 1
+fi
+
+# on invalid template name, print usage
+if [[ ! -d $script_dir/$1 ]]; then
+  echo -e "${bold}${red}Error:${reset} Invalid template name."
+  echo 
+  usage
+  exit 1
+fi
+
+# if destination folder already exists, print error
+if [[ -d $2 ]]; then
+  echo -e "${bold}${red}Error:${reset} A folder with the name ${bold}$2${reset} already exists."
+  exit 1
+fi
+
+# create destination folder and copy template files
+mkdir $2
+cp -r $script_dir/$1/* $2
+
+# print message on success
+if [[ $? -eq 0 ]]; then
+  echo -e "${bold}${green}Success:${reset} Project ${bold}$2${reset} created from template ${bold}$1${reset}."
+fi
