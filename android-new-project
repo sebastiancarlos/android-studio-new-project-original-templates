@@ -24,6 +24,8 @@ function usage () {
   echo -e "  - ${bold}<project-name>${reset} is the name of the project you want to create. A folder"
   echo -e "    with this name will be created in the current directory, and the template"
   echo -e "    files will be copied into it."
+  echo -e "    - This name will be converted to lowercase and CapitalizedCase, and used to name folders"
+  echo -e "      and replace content accordingly."
   echo -e "  - ${bold}--list/-l${reset} will list the available templates."
   echo -e "  - ${bold}--help/-h${reset} prints this help."
   echo ""
@@ -73,6 +75,24 @@ fi
 # create destination folder and copy template files
 mkdir $2
 cp -r $SCRIPT_DIR/$1/* $2
+
+# get lowercase and capitalized versions of project name
+lowercase=$(echo $2 | tr '[:upper:]' '[:lower:]' | tr -cd '[:alnum:]')
+capitalized=$(echo $2 | sed -E 's/[^a-zA-Z0-9]+/\n/g' | awk '{print toupper(substr($0,1,1)) tolower(substr($0,2))}' | tr -d '\n')
+
+# also lowercase version of template name
+lowercase_template=$(echo $1 | tr '[:upper:]' '[:lower:]' | tr -cd '[:alnum:]')
+
+# replace all occurences of template name with project name (both in file names
+# and contents, both lowerscase and CapitalizedCase) in the destination folder
+files_to_rename=$(find $2 -name "*$lowercase_template*")
+for file in $files_to_rename; do
+  new_file=$(echo $file | sed "s/$lowercase_template/$lowercase/g")
+  mv $file $new_file
+done
+for file in $(find $2 -type f); do
+  sed -E -i -e "s/$lowercase_template/$lowercase/g" -e "s/$1/$capitalized/g" $file
+done
 
 # print message on success
 if [[ $? -eq 0 ]]; then

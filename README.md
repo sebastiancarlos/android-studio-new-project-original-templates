@@ -82,8 +82,19 @@ Usage: ./android-new-project <template-name> <project-name>
   - <project-name> is the name of the project you want to create. A folder
     with this name will be created in the current directory, and the template
     files will be copied into it.
+    - This name will be converted to lowercase and CapitalizedCase, and used to name folders
+      and replace content accordingly.
   - --list/-l will list the available templates.
   - --help/-h prints this help.
+
+Available templates:
+  - NoActivity
+  - EmptyViewsActivity
+  - BottomNavigationViewsActivity
+  - NavigationDrawerViewsActivity
+  - ResponsiveViewsActivity
+  - EmptyActivity
+  - BasicViewsActivity
 ```
 
 If you want to install it system-wide, simply run `make install`.
